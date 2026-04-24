@@ -1,0 +1,49 @@
+#monkey-banana
+# State representation
+state = {
+    'monkey_pos': 'A',
+    'box_pos': 'B',
+    'banana_pos': 'C',
+    'monkey_on_box': False,
+    'has_banana': False
+}
+
+def go_to(pos):
+    print(f"Monkey goes to position {pos}")
+    state['monkey_pos'] = pos
+
+def push_box_to(pos):
+    if state['monkey_pos'] == state['box_pos']:
+        print(f"Monkey pushes box to position {pos}")
+        state['box_pos'] = pos
+        state['monkey_pos'] = pos
+    else:
+        print("Monkey cannot push the box")
+
+def climb_box():
+    if state['monkey_pos'] == state['box_pos']:
+        print("Monkey climbs on the box")
+        state['monkey_on_box'] = True
+    else:
+        print("Monkey cannot climb the box")
+
+def grasp_banana():
+    if state['monkey_on_box'] and state['box_pos'] == state['banana_pos']:
+        print("Monkey grasps the banana")
+        state['has_banana'] = True
+    else:
+        print("Monkey cannot reach the banana")
+
+def solve():
+    go_to('B')
+    push_box_to('C')
+    climb_box()
+    grasp_banana()
+    print("\nFinal Result:")
+    if state['has_banana']:
+        print("Monkey successfully got the banana!")
+    else:
+        print("Monkey failed to get the banana")
+
+# Run the program
+solve()

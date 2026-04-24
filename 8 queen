@@ -1,0 +1,38 @@
+#8-queens
+N = 8
+
+def print_solution(pos):
+    for i in range(N):
+        for j in range(N):
+            if pos[i] == j:
+                print("Q", end=" ")
+            else:
+                print(".", end=" ")
+        print()
+    print()
+
+def solve(row, pos, cols, d1, d2):
+    if row == N:
+        print_solution(pos)
+        return True  # change to False for all solutions
+
+    for col in range(N):
+        if col in cols or (row - col) in d1 or (row + col) in d2:
+            continue
+
+        pos[row] = col
+        cols.add(col)
+        d1.add(row - col)
+        d2.add(row + col)
+
+        if solve(row + 1, pos, cols, d1, d2):
+            return True
+
+        cols.remove(col)
+        d1.remove(row - col)
+        d2.remove(row + col)
+
+    return False
+
+pos = [-1] * N
+solve(0, pos, set(), set(), set())

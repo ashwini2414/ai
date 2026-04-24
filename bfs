@@ -1,0 +1,23 @@
+Python Program for BFS
+n =int(input("Enter number of nodes: "))
+adj = []
+for i in range(n):
+neighbours = list(map(int, input(f"Enter neighbours of {i}: ").split()))
+adj.append(neighbours)
+def bfs(adj):
+visited = [0] * len(adj)
+ans = []
+queue = []
+startNode = 0
+visited[startNode] = 1
+queue.append(startNode)
+while queue:
+node = queue.pop(0) # FIFO
+ans.append(node)
+for neighbour in adj[node]:
+if visited[neighbour] == 0:
+visited[neighbour] = 1
+queue.append(neighbour)
+return ans
+result = bfs(adj)
+print("BFS Traversal:", result)
